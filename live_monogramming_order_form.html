@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlanta Monogram | Live Embroidery Activation</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts for Typography & Embroidery Mockups -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=Graduate&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            100: '#fef9c3',
+                            300: '#fde047',
+                            500: '#d4af37',
+                            600: '#ca8a04',
+                            700: '#a16207',
+                        },
+                        falconsRed: '#A71930',
+                        falconsBlack: '#000000',
+                        falconsSilver: '#A5ACAF',
+                        cream: '#FDFBF7'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        cinzel: ['Cinzel', 'serif'],
+                        varsity: ['Graduate', 'cursive', 'sans-serif'],
+                        blockFont: ['Montserrat', 'sans-serif'],
+                        scriptFont: ['Great Vibes', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom embroidery texture and font styling */
+        .embroidery-text {
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.15), -1px -1px 0px rgba(255,255,255,0.3);
+            letter-spacing: 0.05em;
+        }
+        .embroidery-stitch {
+            background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 2px, transparent 2px, transparent 4px);
+        }
+        .bg-pattern {
+            background-color: #FDFBF7;
+            background-image: radial-gradient(#d4af37 0.5px, transparent 0.5px), radial-gradient(#d4af37 0.5px, #FDFBF7 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0,10px 10px;
+            background-opacity: 0.1;
+        }
+        /* Color Swatch Borders */
+        .swatch-white { background-color: #ffffff; border: 2px solid #e5e7eb; }
+        .swatch-black { background-color: #111111; }
+        .swatch-red { background-color: #A71930; }
+        .swatch-pink { background-color: #FF69B4; }
+        .swatch-grey { background-color: #6B7280; }
+        .swatch-silver { background-color: #CBD5E1; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4af37;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-800 font-sans min-h-screen flex flex-col antialiased selection:bg-gold-500 selection:text-white">
+
+    <!-- Top Branding Header -->
+    <header class="bg-gradient-to-r from-stone-900 via-falconsBlack to-stone-900 text-white shadow-xl sticky top-0 z-50 border-b-2 border-gold-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <!-- AM Brand Emblem -->
+                <div class="w-10 h-10 rounded-full border-2 border-gold-500 flex items-center justify-center bg-stone-900 text-gold-500 font-cinzel font-bold text-lg shadow-inner">
+                    AM
+                </div>
+                <div>
+                    <h1 class="font-cinzel tracking-wider text-base sm:text-lg font-bold text-gold-500 uppercase leading-none">Atlanta Monogram</h1>
+                    <p class="text-xs text-stone-300 font-light tracking-wide hidden sm:block">Atlanta Falcons Women's Association • Live Embroidery Activation</p>
+                </div>
+            </div>
+
+            <!-- View Switcher Tabs -->
+            <div class="flex items-center space-x-2 bg-stone-800 p-1 rounded-xl border border-stone-700">
+                <button id="btn-guest-view" onclick="switchTab('guest')" class="px-3 sm:px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 bg-gold-500 text-stone-900 shadow">
+                    <i class="fa-solid fa-pen-nib mr-1.5"></i>Order Form
+                </button>
+                <button id="btn-queue-view" onclick="switchTab('queue')" class="px-3 sm:px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-stone-300 hover:text-white transition-all duration-200 relative">
+                    <i class="fa-solid fa-list-check mr-1.5"></i>Staff Queue
+                    <span id="queue-badge" class="ml-1 px-1.5 py-0.5 text-xs bg-falconsRed text-white rounded-full font-bold hidden">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub-Header Banner for Event Context -->
+    <div class="bg-stone-900 text-stone-200 py-2 px-4 border-b border-stone-800 text-center text-xs sm:text-sm font-medium flex justify-center items-center gap-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>Gameday Personalization Booth • Custom Tank Top Monogramming</span>
+    </div>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-6">
+
+        <!-- ================= GUEST ORDER FORM VIEW ================= -->
+        <div id="view-guest" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Left Column: Form Controls (7 cols) -->
+            <div class="lg:col-span-7 space-y-6">
+                
+                <!-- Guest Information Section -->
+                <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-stone-200">
+                    <div class="flex items-center space-x-2 mb-4 border-b border-stone-100 pb-3">
+                        <span class="w-6 h-6 rounded-full bg-gold-100 text-gold-700 flex items-center justify-center font-bold text-xs">1</span>
+                        <h2 class="font-cinzel text-lg font-bold text-stone-900">Guest Details</h2>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1">Full Name <span class="text-falconsRed">*</span></label>
+                            <input type="text" id="input-name" placeholder="e.g. Sarah Jenkins" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-gold-500 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1">Cell Phone (For SMS Ready Alert) <span class="text-falconsRed">*</span></label>
+                            <input type="tel" id="input-phone" placeholder="(404) 555-0199" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-gold-500 text-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Garment Size Selection Section -->
+                <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-stone-200">
+                    <div class="flex items-center space-x-2 mb-4 border-b border-stone-100 pb-3">
+                        <span class="w-6 h-6 rounded-full bg-gold-100 text-gold-700 flex items-center justify-center font-bold text-xs">2</span>
+                        <h2 class="font-cinzel text-lg font-bold text-stone-900">Tank Top Size</h2>
+                    </div>
+                    <div class="grid grid-cols-5 gap-2 sm:gap-3" id="size-selector-group">
+                        <!-- Size S -->
+                        <button type="button" onclick="selectSize('S')" class="size-btn py-3 rounded-xl border-2 font-bold text-sm text-center transition-all border-stone-200 hover:border-gold-500 hover:bg-stone-50" data-size="S">
+                            S
+                        </button>
+                        <!-- Size M -->
+                        <button type="button" onclick="selectSize('M')" class="size-btn py-3 rounded-xl border-2 font-bold text-sm text-center transition-all border-gold-500 bg-gold-50 text-stone-900" data-size="M">
+                            M
+                        </button>
+                        <!-- Size L -->
+                        <button type="button" onclick="selectSize('L')" class="size-btn py-3 rounded-xl border-2 font-bold text-sm text-center transition-all border-stone-200 hover:border-gold-500 hover:bg-stone-50" data-size="L">
+                            L
+                        </button>
+                        <!-- Size XL -->
+                        <button type="button" onclick="selectSize('XL')" class="size-btn py-3 rounded-xl border-2 font-bold text-sm text-center transition-all border-stone-200 hover:border-gold-500 hover:bg-stone-50" data-size="XL">
+                            XL
+                        </button>
+                        <!-- Size 2XL -->
+                        <button type="button" onclick="selectSize('2XL')" class="size-btn py-3 rounded-xl border-2 font-bold text-sm text-center transition-all border-stone-200 hover:border-gold-500 hover:bg-stone-50" data-size="2XL">
+                            2XL
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Personalization Options Section -->
+                <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-stone-200 space-y-6">
+                    <div class="flex items-center space-x-2 border-b border-stone-100 pb-3">
+                        <span class="w-6 h-6 rounded-full bg-gold-100 text-gold-700 flex items-center justify-center font-bold text-xs">3</span>
+                        <h2 class="font-cinzel text-lg font-bold text-stone-900">Custom Embroidery Details</h2>
+                    </div>
+
+                    <!-- Custom Text Input -->
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-stone-600">Custom Text / Name / Player No.</label>
+                            <span class="text-xs text-stone-400" id="char-counter">0 / 12</span>
+                        </div>
+                        <input type="text" id="input-text" maxlength="12" placeholder="e.g. MRS. 89 or JENNIFER" value="FALCONS" oninput="updatePreview()" class="w-full px-4 py-3 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-gold-500 text-base font-semibold uppercase tracking-wider">
+                    </div>
+
+                    <!-- Font Style Options -->
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-2">Font Style</label>
+                        <div class="grid grid-cols-3 gap-2 sm:gap-3" id="font-selector-group">
+                            <button type="button" onclick="selectFont('Varsity')" class="font-btn p-3 rounded-xl border-2 text-center transition-all border-gold-500 bg-gold-50" data-font="Varsity">
+                                <span class="font-varsity text-lg block text-stone-900">Varsity</span>
+                                <span class="text-[10px] text-stone-500 uppercase tracking-widest font-sans">Collegiate</span>
+                            </button>
+                            <button type="button" onclick="selectFont('Block')" class="font-btn p-3 rounded-xl border-2 text-center transition-all border-stone-200 hover:border-gold-500" data-font="Block">
+                                <span class="font-blockFont font-extrabold text-lg block text-stone-900">BLOCK</span>
+                                <span class="text-[10px] text-stone-500 uppercase tracking-widest font-sans">Bold Modern</span>
+                            </button>
+                            <button type="button" onclick="selectFont('Script')" class="font-btn p-3 rounded-xl border-2 text-center transition-all border-stone-200 hover:border-gold-500" data-font="Script">
+                                <span class="font-scriptFont text-xl block text-stone-900">Script</span>
+                                <span class="text-[10px] text-stone-500 uppercase tracking-widest font-sans">Elegant</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Thread Color Selection -->
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-2">Thread Color</label>
+                        <div class="grid grid-cols-3 sm:grid-cols-6 gap-3" id="color-selector-group">
+                            <!-- Red -->
+                            <button type="button" onclick="selectColor('red', '#A71930')" class="color-btn flex flex-col items-center p-2 rounded-xl border-2 border-gold-500 bg-stone-50" data-color="red">
+                                <span class="w-8 h-8 rounded-full swatch-red shadow-sm mb-1 ring-2 ring-offset-1 ring-transparent"></span>
+                                <span class="text-xs font-medium text-stone-700">Red</span>
+                            </button>
+                            <!-- Pink -->
+                            <button type="button" onclick="selectColor('pink', '#FF69B4')" class="color-btn flex flex-col items-center p-2 rounded-xl border-2 border-stone-200 hover:border-gold-300" data-color="pink">
+                                <span class="w-8 h-8 rounded-full swatch-pink shadow-sm mb-1"></span>
+                                <span class="text-xs font-medium text-stone-700">Pink</span>
+                            </button>
+                            <!-- Black -->
+                            <button type="button" onclick="selectColor('black', '#111111')" class="color-btn flex flex-col items-center p-2 rounded-xl border-2 border-stone-200 hover:border-gold-300" data-color="black">
+                                <span class="w-8 h-8 rounded-full swatch-black shadow-sm mb-1"></span>
+                                <span class="text-xs font-medium text-stone-700">Black</span>
+                            </button>
+                            <!-- Grey -->
+                            <button type="button" onclick="selectColor('grey', '#6B7280')" class="color-btn flex flex-col items-center p-2 rounded-xl border-2 border-stone-200 hover:border-gold-300" data-color="grey">
+                                <span class="w-8 h-8 rounded-full swatch-grey shadow-sm mb-1"></span>
+                                <span class="text-xs font-medium text-stone-700">Grey</span>
+                            </button>
+                            <!-- Silver -->
+                            <button type="button" onclick="selectColor('silver', '#9CA3AF')" class="color-btn flex flex-col items-center p-2 rounded-xl border-2 border-stone-200 hover:border-gold-300" data-color="silver">
+                                <span class="w-8 h-8 rounded-full swatch-silver shadow-sm mb-1"></span>
+                                <span class="text-xs font-medium text-stone-700">Silver</span>
+                            </button>
+                            <!-- White -->
+                            <button type="button" onclick="selectColor('white', '#FFFFFF')" class="color-btn flex flex-col items-center p-2 rounded-xl border-2 border-stone-200 hover:border-gold-300" data-color="white">
+                                <span class="w-8 h-8 rounded-full swatch-white shadow-sm mb-1"></span>
+                                <span class="text-xs font-medium text-stone-700">White</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Embroidery Icon Options -->
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-2">Embroidery Icon</label>
+                        <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-3" id="icon-selector-group">
+                            <button type="button" onclick="selectIcon('Football')" class="icon-btn p-2 rounded-xl border-2 border-gold-500 bg-gold-50 text-center" data-icon="Football">
+                                <div class="h-8 flex items-center justify-center text-xl text-stone-800"><i class="fa-solid fa-football"></i></div>
+                                <span class="text-[11px] font-medium block">Football</span>
+                            </button>
+                            <button type="button" onclick="selectIcon('Helmet')" class="icon-btn p-2 rounded-xl border-2 border-stone-200 hover:border-gold-500 text-center" data-icon="Helmet">
+                                <div class="h-8 flex items-center justify-center text-xl text-stone-800"><i class="fa-solid fa-helmet-safety"></i></div>
+                                <span class="text-[11px] font-medium block">Helmet</span>
+                            </button>
+                            <button type="button" onclick="selectIcon('Heart')" class="icon-btn p-2 rounded-xl border-2 border-stone-200 hover:border-gold-500 text-center" data-icon="Heart">
+                                <div class="h-8 flex items-center justify-center text-xl text-stone-800"><i class="fa-solid fa-heart"></i></div>
+                                <span class="text-[11px] font-medium block">Heart</span>
+                            </button>
+                            <button type="button" onclick="selectIcon('Flag')" class="icon-btn p-2 rounded-xl border-2 border-stone-200 hover:border-gold-500 text-center" data-icon="Flag">
+                                <div class="h-8 flex items-center justify-center text-xl text-stone-800"><i class="fa-solid fa-flag"></i></div>
+                                <span class="text-[11px] font-medium block">Flag</span>
+                            </button>
+                            <button type="button" onclick="selectIcon('Bow')" class="icon-btn p-2 rounded-xl border-2 border-stone-200 hover:border-gold-500 text-center" data-icon="Bow">
+                                <div class="h-8 flex items-center justify-center text-xl text-stone-800"><i class="fa-solid fa-ribbon"></i></div>
+                                <span class="text-[11px] font-medium block">Bow</span>
+                            </button>
+                            <button type="button" onclick="selectIcon('None')" class="icon-btn p-2 rounded-xl border-2 border-stone-200 hover:border-gold-500 text-center" data-icon="None">
+                                <div class="h-8 flex items-center justify-center text-xs text-stone-400"><i class="fa-solid fa-ban"></i></div>
+                                <span class="text-[11px] font-medium block">No Icon</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Special Notes Section -->
+                <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-stone-200">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-2">Special Instructions / Placement Notes</label>
+                    <textarea id="input-notes" rows="2" placeholder="e.g. Place icon to the left of name; Center placement preferred..." class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-gold-500 text-sm"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="button" onclick="submitOrder()" class="w-full bg-gradient-to-r from-falconsRed to-red-700 hover:from-red-700 hover:to-falconsRed text-white font-bold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 text-base flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>Submit Monogram Order</span>
+                </button>
+            </div>
+
+            <!-- Right Column: Interactive Tank Top Preview Card (5 cols) -->
+            <div class="lg:col-span-5">
+                <div class="lg:sticky lg:top-24 space-y-4">
+                    <div class="bg-white rounded-2xl p-6 shadow-md border border-stone-200">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold uppercase tracking-widest text-stone-500">Live Preview</span>
+                            <span id="preview-size-tag" class="px-2.5 py-1 bg-stone-100 border border-stone-300 text-stone-800 text-xs font-bold rounded-lg">Size: M</span>
+                        </div>
+
+                        <!-- Canvas Mockup Container -->
+                        <div class="relative w-full aspect-[4/5] bg-stone-200 rounded-xl overflow-hidden border border-stone-300 flex items-center justify-center shadow-inner">
+                            <!-- Background Tank Top Mockup Illustration (SVG Base) -->
+                            <svg class="absolute inset-0 w-full h-full text-stone-300 p-4" viewBox="0 0 300 400" fill="currentColor">
+                                <!-- Tank top silhouette -->
+                                <path d="M 100 30 C 120 50, 180 50, 200 30 L 230 80 L 210 130 C 200 130, 190 120, 190 100 L 110 100 C 110 120, 100 130, 90 130 L 70 80 Z" fill="#F0EFEA"/>
+                                <path d="M 70 80 L 90 130 C 100 180, 80 250, 80 370 L 220 370 C 220 250, 200 180, 210 130 L 230 80 C 200 110, 100 110, 70 80 Z" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+                                <!-- Seam details -->
+                                <path d="M 100 30 C 130 60, 170 60, 200 30" stroke="#CBD5E1" stroke-width="2" fill="none" stroke-dasharray="2,2"/>
+                            </svg>
+
+                            <!-- Live Embroidered Text & Icon Display Layer -->
+                            <div class="relative z-10 flex flex-col items-center justify-center p-6 text-center max-w-[80%] mx-auto bg-stone-50/60 backdrop-blur-[1px] rounded-2xl border border-dashed border-stone-300/80 shadow-sm min-h-[140px]">
+                                
+                                <!-- Icon Preview Container -->
+                                <div id="preview-icon-container" class="mb-2 text-2xl transition-all duration-300">
+                                    <i id="preview-icon-elem" class="fa-solid fa-football"></i>
+                                </div>
+
+                                <!-- Text Preview -->
+                                <div id="preview-text-elem" class="embroidery-text embroidery-stitch font-varsity text-2xl sm:text-3xl font-extrabold break-all transition-all duration-200" style="color: #A71930;">
+                                    FALCONS
+                                </div>
+
+                                <div class="mt-3 flex items-center space-x-2 text-[10px] uppercase font-semibold text-stone-400">
+                                    <span id="preview-font-tag">Varsity Font</span>
+                                    <span>•</span>
+                                    <span id="preview-color-tag">Red Thread</span>
+                                </div>
+                            </div>
+
+                            <!-- Watermark Logo Overlay in preview -->
+                            <div class="absolute bottom-3 right-3 opacity-30 pointer-events-none flex items-center space-x-1">
+                                <span class="font-cinzel text-[10px] font-bold text-stone-700">Atlanta Monogram</span>
+                            </div>
+                        </div>
+
+                        <!-- Order Summary Card Info -->
+                        <div class="mt-4 pt-4 border-t border-stone-100 space-y-2 text-xs text-stone-600">
+                            <div class="flex justify-between">
+                                <span>Activation Venue:</span>
+                                <span class="font-semibold text-stone-800">Falcons Women's Assoc.</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Item Type:</span>
+                                <span class="font-semibold text-stone-800">Custom Athletic Tank Top</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Turnaround:</span>
+                                <span class="font-semibold text-emerald-600">Live / On-Demand (~15 mins)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= STAFF QUEUE / MANAGEMENT VIEW ================= -->
+        <div id="view-queue" class="hidden space-y-6">
+            
+            <!-- Queue Controls Header -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-stone-200 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <h2 class="font-cinzel text-xl font-bold text-stone-900">Embroidery Production Queue</h2>
+                    <p class="text-xs text-stone-500">Manage orders, update status, and view customer specifications for live stitching.</p>
+                </div>
+                
+                <div class="flex flex-wrap items-center gap-2">
+                    <!-- Status Filter -->
+                    <select id="filter-status" onchange="renderQueue()" class="px-3 py-2 bg-stone-50 border border-stone-300 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-gold-500">
+                        <option value="All">All Statuses</option>
+                        <option value="Queued">Queued</option>
+                        <option value="In Production">In Production</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+
+                    <!-- Export Button -->
+                    <button onclick="exportOrdersCSV()" class="px-3 py-2 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-xs font-semibold transition border border-stone-300 flex items-center space-x-1">
+                        <i class="fa-solid fa-file-csv text-emerald-600"></i>
+                        <span>Export CSV</span>
+                    </button>
+
+                    <!-- Clear Completed -->
+                    <button onclick="clearCompletedOrders()" class="px-3 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-xl text-xs font-semibold transition border border-rose-200 flex items-center space-x-1">
+                        <i class="fa-solid fa-trash-can"></i>
+                        <span>Clear Completed</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="bg-white p-4 rounded-xl border border-stone-200 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-[10px] font-bold uppercase text-stone-400">Total Orders</p>
+                        <p id="stat-total" class="text-2xl font-bold text-stone-800">0</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-stone-600">
+                        <i class="fa-solid fa-list"></i>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-stone-200 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-[10px] font-bold uppercase text-stone-400">Queued</p>
+                        <p id="stat-queued" class="text-2xl font-bold text-amber-600">0</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center text-amber-600">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-stone-200 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-[10px] font-bold uppercase text-stone-400">In Production</p>
+                        <p id="stat-production" class="text-2xl font-bold text-blue-600">0</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+                        <i class="fa-solid fa-gears"></i>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-stone-200 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-[10px] font-bold uppercase text-stone-400">Completed</p>
+                        <p id="stat-completed" class="text-2xl font-bold text-emerald-600">0</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Queue Table / List Container -->
+            <div class="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-stone-50 border-b border-stone-200 text-[11px] font-bold uppercase text-stone-500 tracking-wider">
+                                <th class="py-3.5 px-4">Order ID & Time</th>
+                                <th class="py-3.5 px-4">Guest Info</th>
+                                <th class="py-3.5 px-4">Garment</th>
+                                <th class="py-3.5 px-4">Embroidery Specs</th>
+                                <th class="py-3.5 px-4">Notes</th>
+                                <th class="py-3.5 px-4">Status</th>
+                                <th class="py-3.5 px-4 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="queue-table-body" class="divide-y divide-stone-100 text-sm">
+                            <!-- Orders will be dynamically injected here -->
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Empty state placeholder -->
+                <div id="queue-empty" class="py-12 text-center text-stone-400 space-y-2">
+                    <i class="fa-solid fa-inbox text-4xl text-stone-300"></i>
+                    <p class="text-sm">No orders in the queue yet.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Notification Toast Box -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+    <script>
+        // State storage for selected options
+        let currentOrderState = {
+            size: 'M',
+            text: 'FALCONS',
+            font: 'Varsity',
+            colorName: 'Red',
+            colorHex: '#A71930',
+            icon: 'Football'
+        };
+
+        // Icon FontAwesome mapping
+        const iconFaMap = {
+            'Football': 'fa-football',
+            'Helmet': 'fa-helmet-safety',
+            'Heart': 'fa-heart',
+            'Flag': 'fa-flag',
+            'Bow': 'fa-ribbon',
+            'None': 'fa-ban'
+        };
+
+        // Font Class mapping for preview
+        const fontClassMap = {
+            'Varsity': 'font-varsity',
+            'Block': 'font-blockFont font-black uppercase',
+            'Script': 'font-scriptFont text-3xl font-normal capitalize'
+        };
+
+        // Initial sample order queue for demo
+        let orders = [
+            {
+                id: 'AM-1001',
+                time: '1:15 PM',
+                name: 'Michelle Smith',
+                phone: '(404) 555-8921',
+                size: 'L',
+                text: 'MICHELLE',
+                font: 'Script',
+                colorName: 'Pink',
+                colorHex: '#FF69B4',
+                icon: 'Heart',
+                notes: 'Place icon on right chest',
+                status: 'Completed'
+            },
+            {
+                id: 'AM-1002',
+                time: '1:22 PM',
+                name: 'Alicia Taylor',
+                phone: '(404) 555-3412',
+                size: 'M',
+                text: 'ALICIA',
+                font: 'Block',
+                colorName: 'Red',
+                colorHex: '#A71930',
+                icon: 'Football',
+                notes: 'Standard center alignment',
+                status: 'In Production'
+            }
+        ];
+
+        // Tab Switcher Logic
+        function switchTab(tab) {
+            const guestView = document.getElementById('view-guest');
+            const queueView = document.getElementById('view-queue');
+            const btnGuest = document.getElementById('btn-guest-view');
+            const btnQueue = document.getElementById('btn-queue-view');
+
+            if (tab === 'guest') {
+                guestView.classList.remove('hidden');
+                queueView.classList.add('hidden');
+                btnGuest.className = "px-3 sm:px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 bg-gold-500 text-stone-900 shadow";
+                btnQueue.className = "px-3 sm:px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-stone-300 hover:text-white transition-all duration-200 relative";
+            } else {
+                guestView.classList.add('hidden');
+                queueView.classList.remove('hidden');
+                btnQueue.className = "px-3 sm:px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 bg-gold-500 text-stone-900 shadow";
+                btnGuest.className = "px-3 sm:px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-stone-300 hover:text-white transition-all duration-200";
+                renderQueue();
+            }
+        }
+
+        // Selection Handlers
+        function selectSize(size) {
+            currentOrderState.size = size;
+            document.querySelectorAll('.size-btn').forEach(btn => {
+                if (btn.dataset.size === size) {
+                    btn.className = "size-btn py-3 rounded-xl border-2 font-bold text-sm text-center transition-all border-gold-500 bg-gold-50 text-stone-900";
+                } else {
+                    btn.className = "size-btn py-3 rounded-xl border-2 font-bold text-sm text-center transition-all border-stone-200 hover:border-gold-500 hover:bg-stone-50 text-stone-700";
+                }
+            });
+            updatePreview();
+        }
+
+        function selectFont(font) {
+            currentOrderState.font = font;
+            document.querySelectorAll('.font-btn').forEach(btn => {
+                if (btn.dataset.font === font) {
+                    btn.className = "font-btn p-3 rounded-xl border-2 text-center transition-all border-gold-500 bg-gold-50";
+                } else {
+                    btn.className = "font-btn p-3 rounded-xl border-2 text-center transition-all border-stone-200 hover:border-gold-500";
+                }
+            });
+            updatePreview();
+        }
+
+        function selectColor(name, hex) {
+            currentOrderState.colorName = name.charAt(0).toUpperCase() + name.slice(1);
+            currentOrderState.colorHex = hex;
+            document.querySelectorAll('.color-btn').forEach(btn => {
+                if (btn.dataset.color === name) {
+                    btn.classList.add('border-gold-500', 'bg-stone-50');
+                    btn.classList.remove('border-stone-200');
+                } else {
+                    btn.classList.remove('border-gold-500', 'bg-stone-50');
+                    btn.classList.add('border-stone-200');
+                }
+            });
+            updatePreview();
+        }
+
+        function selectIcon(iconName) {
+            currentOrderState.icon = iconName;
+            document.querySelectorAll('.icon-btn').forEach(btn => {
+                if (btn.dataset.icon === iconName) {
+                    btn.className = "icon-btn p-2 rounded-xl border-2 border-gold-500 bg-gold-50 text-center";
+                } else {
+                    btn.className = "icon-btn p-2 rounded-xl border-2 border-stone-200 hover:border-gold-500 text-center";
+                }
+            });
+            updatePreview();
+        }
+
+        function updatePreview() {
+            const inputVal = document.getElementById('input-text').value || 'YOUR TEXT';
+            currentOrderState.text = inputVal;
+
+            // Character counter update
+            document.getElementById('char-counter').innerText = `${inputVal.length} / 12`;
+
+            // Element refs
+            const textElem = document.getElementById('preview-text-elem');
+            const iconElem = document.getElementById('preview-icon-elem');
+            const iconContainer = document.getElementById('preview-icon-container');
+            const sizeTag = document.getElementById('preview-size-tag');
+            const fontTag = document.getElementById('preview-font-tag');
+            const colorTag = document.getElementById('preview-color-tag');
+
+            // Set Text
+            textElem.innerText = currentOrderState.text;
+            textElem.style.color = currentOrderState.colorHex;
+
+            // Apply Font styling
+            textElem.className = `embroidery-text embroidery-stitch transition-all duration-200 ${fontClassMap[currentOrderState.font]}`;
+
+            // Set Icon
+            if (currentOrderState.icon === 'None') {
+                iconContainer.classList.add('hidden');
+            } else {
+                iconContainer.classList.remove('hidden');
+                iconElem.className = `fa-solid ${iconFaMap[currentOrderState.icon]}`;
+                iconElem.style.color = currentOrderState.colorHex;
+            }
+
+            // Tags
+            sizeTag.innerText = `Size: ${currentOrderState.size}`;
+            fontTag.innerText = `${currentOrderState.font} Font`;
+            colorTag.innerText = `${currentOrderState.colorName} Thread`;
+        }
+
+        function submitOrder() {
+            const name = document.getElementById('input-name').value.trim();
+            const phone = document.getElementById('input-phone').value.trim();
+            const notes = document.getElementById('input-notes').value.trim();
+
+            if (!name) {
+                showToast('Please enter your full name.', 'error');
+                document.getElementById('input-name').focus();
+                return;
+            }
+
+            if (!phone) {
+                showToast('Please enter your phone number for SMS notifications.', 'error');
+                document.getElementById('input-phone').focus();
+                return;
+            }
+
+            // Create new order
+            const newOrder = {
+                id: 'AM-' + Math.floor(1000 + Math.random() * 9000),
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                name: name,
+                phone: phone,
+                size: currentOrderState.size,
+                text: currentOrderState.text.toUpperCase(),
+                font: currentOrderState.font,
+                colorName: currentOrderState.colorName,
+                colorHex: currentOrderState.colorHex,
+                icon: currentOrderState.icon,
+                notes: notes || 'None',
+                status: 'Queued'
+            };
+
+            orders.unshift(newOrder);
+
+            // Reset form
+            document.getElementById('input-name').value = '';
+            document.getElementById('input-phone').value = '';
+            document.getElementById('input-notes').value = '';
+
+            showToast(`Order #${newOrder.id} submitted successfully!`, 'success');
+            
+            // Switch to queue view to confirm
+            setTimeout(() => {
+                switchTab('queue');
+            }, 800);
+        }
+
+        function renderQueue() {
+            const tbody = document.getElementById('queue-table-body');
+            const emptyState = document.getElementById('queue-empty');
+            const filter = document.getElementById('filter-status').value;
+
+            tbody.innerHTML = '';
+
+            const filteredOrders = orders.filter(o => filter === 'All' || o.status === filter);
+
+            if (filteredOrders.length === 0) {
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                
+                filteredOrders.forEach(o => {
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-stone-50/80 transition-colors";
+
+                    // Status Badge Styling
+                    let badgeClass = "bg-amber-100 text-amber-800 border-amber-300";
+                    if (o.status === 'In Production') badgeClass = "bg-blue-100 text-blue-800 border-blue-300";
+                    if (o.status === 'Completed') badgeClass = "bg-emerald-100 text-emerald-800 border-emerald-300";
+
+                    tr.innerHTML = `
+                        <td class="py-3.5 px-4 font-mono">
+                            <span class="font-bold text-stone-900 block">${o.id}</span>
+                            <span class="text-xs text-stone-400">${o.time}</span>
+                        </td>
+                        <td class="py-3.5 px-4">
+                            <div class="font-semibold text-stone-800">${o.name}</div>
+                            <div class="text-xs text-stone-500"><i class="fa-solid fa-phone text-[10px] mr-1"></i>${o.phone}</div>
+                        </td>
+                        <td class="py-3.5 px-4">
+                            <span class="px-2 py-1 bg-stone-100 rounded-md font-bold text-xs border border-stone-300">${o.size}</span>
+                        </td>
+                        <td class="py-3.5 px-4">
+                            <div class="flex items-center space-x-2">
+                                <span class="font-bold tracking-wider text-base" style="color: ${o.colorHex};">${o.text}</span>
+                            </div>
+                            <div class="text-[11px] text-stone-500 flex items-center space-x-1 mt-0.5">
+                                <span>${o.font}</span> • 
+                                <span>${o.colorName}</span> • 
+                                <span>Icon: ${o.icon}</span>
+                            </div>
+                        </td>
+                        <td class="py-3.5 px-4 text-xs text-stone-500 max-w-[150px] truncate" title="${o.notes}">
+                            ${o.notes}
+                        </td>
+                        <td class="py-3.5 px-4">
+                            <span class="px-2.5 py-1 rounded-full text-xs font-semibold border ${badgeClass}">
+                                ${o.status}
+                            </span>
+                        </td>
+                        <td class="py-3.5 px-4 text-right space-x-1">
+                            ${o.status === 'Queued' ? `
+                                <button onclick="updateOrderStatus('${o.id}', 'In Production')" class="px-2.5 py-1 bg-blue-600 text-white rounded-lg text-xs font-bold hover:bg-blue-700 transition" title="Start Production">
+                                    Start
+                                </button>
+                            ` : ''}
+                            ${o.status === 'In Production' ? `
+                                <button onclick="updateOrderStatus('${o.id}', 'Completed')" class="px-2.5 py-1 bg-emerald-600 text-white rounded-lg text-xs font-bold hover:bg-emerald-700 transition" title="Complete Order">
+                                    Complete
+                                </button>
+                            ` : ''}
+                            ${o.status === 'Completed' ? `
+                                <span class="text-emerald-600 text-xs font-medium"><i class="fa-solid fa-check-double mr-1"></i>Done</span>
+                            ` : ''}
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            updateStats();
+        }
+
+        function updateOrderStatus(id, newStatus) {
+            const order = orders.find(o => o.id === id);
+            if (order) {
+                order.status = newStatus;
+                showToast(`Order #${id} marked as ${newStatus}`, 'info');
+                renderQueue();
+            }
+        }
+
+        function updateStats() {
+            const total = orders.length;
+            const queued = orders.filter(o => o.status === 'Queued').length;
+            const production = orders.filter(o => o.status === 'In Production').length;
+            const completed = orders.filter(o => o.status === 'Completed').length;
+
+            document.getElementById('stat-total').innerText = total;
+            document.getElementById('stat-queued').innerText = queued;
+            document.getElementById('stat-production').innerText = production;
+            document.getElementById('stat-completed').innerText = completed;
+
+            // Queue Badge in top nav
+            const badge = document.getElementById('queue-badge');
+            if (queued > 0) {
+                badge.innerText = queued;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        function clearCompletedOrders() {
+            const initialCount = orders.length;
+            orders = orders.filter(o => o.status !== 'Completed');
+            const clearedCount = initialCount - orders.length;
+            
+            if (clearedCount > 0) {
+                showToast(`Cleared ${clearedCount} completed order(s).`, 'info');
+                renderQueue();
+            } else {
+                showToast('No completed orders to clear.', 'info');
+            }
+        }
+
+        function exportOrdersCSV() {
+            if (orders.length === 0) {
+                showToast('No orders to export.', 'error');
+                return;
+            }
+
+            let csvContent = "data:text/csv;charset=utf-8,Order ID,Time,Name,Phone,Size,Text,Font,Thread Color,Icon,Notes,Status\n";
+
+            orders.forEach(o => {
+                const row = [
+                    o.id,
+                    `"${o.time}"`,
+                    `"${o.name}"`,
+                    `"${o.phone}"`,
+                    o.size,
+                    `"${o.text}"`,
+                    o.font,
+                    o.colorName,
+                    o.icon,
+                    `"${o.notes.replace(/"/g, '""')}"`,
+                    o.status
+                ].join(",");
+                csvContent += row + "\n";
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `Atlanta_Monogram_Orders_${new Date().toISOString().slice(0,10)}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            showToast('Exported orders CSV file', 'success');
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+
+            let bg = 'bg-stone-900 text-white';
+            if (type === 'success') bg = 'bg-emerald-700 text-white';
+            if (type === 'error') bg = 'bg-falconsRed text-white';
+
+            toast.className = `${bg} px-4 py-3 rounded-xl shadow-xl text-xs font-semibold flex items-center space-x-2 transition-all duration-300 transform translate-y-2 opacity-0 pointer-events-auto border border-white/20`;
+            toast.innerHTML = `
+                <span>${message}</span>
+            `;
+
+            container.appendChild(toast);
+
+            // Animate in
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 50);
+
+            // Animate out & remove
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        window.onload = function() {
+            updatePreview();
+            updateStats();
+        };
+    </script>
+</body>
+</html>

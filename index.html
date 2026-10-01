@@ -663,7 +663,33 @@
                 notes: notes || 'None',
                 status: 'Queued'
             };
+// Send order to Atlanta Monogram Google Sheet
+const googleSheetURL =
+  'https://script.google.com/macros/s/AKfycbx4z3Jv27N8lou1wnL92p9SI7gpLZSEP8IoKeqD5nq0u_C53MZ2oHme_0028DkvB9GE/exec';
 
+const sheetData = new URLSearchParams({
+  orderId: newOrder.id,
+  name: newOrder.name,
+  phone: newOrder.phone,
+  tankSize: newOrder.size,
+  personalization: newOrder.text,
+  font: newOrder.font,
+  threadColor: newOrder.colorName,
+  icon: newOrder.icon,
+  notes: newOrder.notes,
+  status: 'WAITING'
+});
+
+fetch(googleSheetURL, {
+  method: 'POST',
+  mode: 'no-cors',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
+  body: sheetData.toString()
+}).catch(error => {
+  console.error('Google Sheet submission error:', error);
+});
             orders.unshift(newOrder);
 
             // Reset form
